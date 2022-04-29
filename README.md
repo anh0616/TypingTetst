@@ -66,7 +66,7 @@ Run main.py to use the program
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Comments the codes.
+- [ ] Comment the codes.
 - [ ] User interface.
 
 

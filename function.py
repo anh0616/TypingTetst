@@ -49,33 +49,33 @@ def typeTimer():    # To get the current time on call.
     return hour, minute, second
 
 def typeScore(usrInp, textInp, lostPnt):    # Calculate the final percentage and score.
-    inpLen = len(usrInp)
-    maxGrade = len(textInp)
+    inpLen = len(usrInp)                    # Get lenght of user's input.
+    maxGrade = len(textInp)                 # Get lenght of sample text.
     correctAns = 0
 
     for x in range(inpLen):
-        if (usrInp[x] == textInp[x]):
-            correctAns += 1
+        if (usrInp[x] == textInp[x]):       # Compare user's input and sample.
+            correctAns += 1                 # +1 score everytime the character match.
 
-    finalGrade = correctAns - lostPnt
-    finalPercentage = (finalGrade / maxGrade) * 100
+    finalGrade = correctAns - lostPnt               # Subtrack points from 'backspace', etc.
+    finalPercentage = (finalGrade / maxGrade) * 100 # Get the final percentage of the score.
 
     return finalGrade, finalPercentage, maxGrade
 
-def wordCount(string):
+def wordCount(string):  # Count how many words in the user's sample .txt.
     wordCount = 1
 
-    for i in range(len(string)):
+    for i in range(len(string)):    # Go through the file, to find space, new line and tab. 
         if ((string[i] == ' ') or (string[i] == '\n') or (string[i] == '\t')):
-            wordCount += 1
+            wordCount += 1          # Increament the word count.
     return wordCount
 
-def timeCalculate(init_hrs, end_hrs, init_mins, end_mins, init_secs, end_secs):
-    final_hrs = end_hrs - init_hrs
-    final_mins = end_mins - init_mins
-    final_secs = end_secs - init_secs
+def timeCalculate(init_hrs, end_hrs, init_mins, end_mins, init_secs, end_secs): # Find the time.
+    final_hrs = end_hrs - init_hrs      # Get the hours different before and after texting.
+    final_mins = end_mins - init_mins   # Get the minutes different before and after texting.
+    final_secs = end_secs - init_secs   # Get the seconds different before and after texting.
 
-    if (final_hrs < 0):
+    if (final_hrs < 0):                 # If the result is negative number, add 60 to it.
         final_hrs = 60 + final_hrs
     if (final_mins < 0):
         final_mins = 60 + final_mins
@@ -84,44 +84,44 @@ def timeCalculate(init_hrs, end_hrs, init_mins, end_mins, init_secs, end_secs):
 
     return final_hrs, final_mins, final_secs
 
-def typeWPM(usrInp, wordCount, hrs, mins, secs):
+def typeWPM(usrInp, wordCount, hrs, mins, secs):    # Calculate word per minute.
     charCount = len(usrInp)
-    minsCount = (hrs * 60) + mins + (secs * 60)
+    minsCount = (hrs * 60) + mins + (secs * 60)     # Convert everything to minute.
 
-    if(minsCount == 0):
+    if(minsCount == 0):                             # Set minute = 1 to prevent divisor = 0.
         minsCount = 1
 
-    grossWPM = (charCount  / wordCount) / minsCount
+    grossWPM = (charCount  / wordCount) / minsCount # Gross WPM formula.
 
     return round(grossWPM, 2)
 
-def typeFileR():
+def typeFileR():    # Take in user's sample .txt file.
     while True:
         fileName = input("\nPlease enter the file's name ('d' for default): ")
         
-        path = Path(sampleDir + fileName)
+        path = Path(sampleDir + fileName)   # Combine user's input and the default dir.
 
-        if(path.is_file() == True):
-            text_file = open(path,"r")
-            data = text_file.read()
-            text_file.close()
+        if(path.is_file() == True):         # Check if the file is exist.
+            text_file = open(path,"r")      # Open the file.
+            data = text_file.read()         # Read the file into data.
+            text_file.close()               # Close the file.
             return data
-        elif(fileName == "d"):
+        elif(fileName == "d"):              # Return default sample if user input 'd'.
             return "Hello World"
-        else:
+        else:                               # File does not exist.
             print("!! FILE DOES NOT EXIST !!\n")
 
 def typeFileW(
     finalGrade, maxGrade, finalPercentage, 
     final_hrs, final_mins, final_secs,
     usrInput, sampleLen
-):
-    time = datetime.now()
-    path = Path(recordDir + "record.txt")
+):                                          # Save the testing record into a .txt file.
+    time = datetime.now()                   # Get current time.
+    path = Path(recordDir + "record.txt")   # Get the path of the record.txt file
 
-    if(path.is_file() == True):
+    if(path.is_file() == True):             # If the file existed, append to it.
         text_file = open(path,"a")
-    else:
+    else:                                   # If the file doesn't exist, create and write to it.
         text_file = open(path,"w")
 
     text_file.write(
@@ -133,7 +133,7 @@ def typeFileW(
             final_hrs, final_mins, final_secs,
             typeWPM(usrInput, sampleLen, final_hrs, final_mins, final_secs)
         )
-    )
-    text_file.close()
-    print("Saved to", path)
+    )                       # Write in everything needed to be record.
+    text_file.close()       # Close the file.
+    print("Saved to", path) # Prompt the user that everything is saved.
     print("\n\n")

@@ -5,11 +5,11 @@ from pathlib import Path
 sampleDir = "textSample/"
 recordDir = "record/"
 
-def typeIn():
+def typeIn():       # The typing test itself.
     run = 1
-    userInput = []
-    userResult = []
-    subPoint = 0
+    userInput = []  # List to hold user's input.
+    userResult = [] # List to hold sample text.
+    subPoint = 0    # Point deducted.
 
     while (run == 1):
         pressedKey = msvcrt.getch() # Take in keyboard's input in real time.
@@ -18,37 +18,37 @@ def typeIn():
         asciiCode = int(pressedKey[0])  # Convert input into ascii code.
         asciiChar = chr(pressedKey[0])  # Convert input into character.
         
-        if (asciiCode == 13):   # Enter/Return to quit
+        if (asciiCode == 13):   # Enter/Return to end the test.
             run = 0
-        elif (asciiCode == 27):
+        elif (asciiCode == 27): # Esc to quit the program.
             exit()
         elif(((asciiCode < 32) or (asciiCode > 126)) and (asciiCode != 8)): # Valid character check.
-            subPoint += 1
+            subPoint += 1                                                   # Deduct point.
             userInput.append("INVALID")
-        elif(asciiCode == 8):
+        elif(asciiCode == 8):           # Check if user hit backspace.
             if(len(userResult) > 0):
-                userResult.pop()
-                subPoint += 0.5
-                userInput.append("<-")
+                userResult.pop()        # Pop the last character if the list is not empty.
+                subPoint += 0.5         # Deduct point.
+                userInput.append("<-")  # Append 'backspace' into the user's list.
             else:
-                subPoint += 0.5
-                userInput.append("<-")
+                subPoint += 0.5         # Deduct point.
+                userInput.append("<-")  # Append 'backspace' into the user's list.
         else:
-            userInput.append(asciiChar)
-            userResult.append(asciiChar)
+            userInput.append(asciiChar)     # Append all user's input including backspace.
+            userResult.append(asciiChar)    # Doesn't append backspace and popped characters.
     
     return userInput, userResult, subPoint
 
-def typeTimer():
-    now = datetime.now()
+def typeTimer():    # To get the current time on call.
+    now = datetime.now()    # Get the current time and put it in 'now' object.
 
-    hour = now.hour
-    minute = now.minute
-    second = now.second
+    hour = now.hour         # Get the current hour from 'now' and put it in 'hour'
+    minute = now.minute     # Get the current minute from 'now' and put it in 'minute'
+    second = now.second     # Get the current second from 'now' and put it in 'second'
 
     return hour, minute, second
 
-def typeScore(usrInp, textInp, lostPnt):
+def typeScore(usrInp, textInp, lostPnt):    # Calculate the final percentage and score.
     inpLen = len(usrInp)
     maxGrade = len(textInp)
     correctAns = 0

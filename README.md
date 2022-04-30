@@ -60,13 +60,14 @@ Run main.py to use the program
 
 1. User can import custom test by placing a .txt file inside `textSample` folder.
 2. User can see recorded score inside `record/record.txt` if choose to.
+3. Since this program is terminal based and because of the way I built it, text won't be show as you
+typing but they are being record so don't worry.
 
 
 
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Comment the codes.
 - [ ] User interface.
 
 

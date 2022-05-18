@@ -38,7 +38,7 @@ A small project of me making a typing test to review Python and practice my docu
 <!-- GETTING STARTED -->
 ## Getting Started
 
-You only need Python 3 (preferably latest stable version) to run this program.
+You will need `Python 3` (preferably latest stable version), `datetime` and `pathlib` library to run this program.
 
 ### Prerequisites and Installation
 
@@ -46,6 +46,19 @@ Download and install Python 3.
 * Python 3
   ```sh
   https://www.python.org/downloads/
+  ```
+Dependencies.
+* Install from `requirements.txt`
+  ```sh
+  pip install --user -r requirements.txt
+  ```
+* Manually install `datetime`
+  ```sh
+  pip install datetime
+  ```
+* Manually install `pathlib`
+  ```sh
+  pip install pathlib
   ```
 
 
